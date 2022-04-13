@@ -42,7 +42,36 @@ public class SingleLinkedListDemo {
         int length = getLength(singleLinkedList.getHead());
         System.out.printf("该链表的有效节点数为: %d \n", length);
 
-        System.out.printf("找到倒数第 %d 节点 heroNode = " + findLastIndexNode(singleLinkedList.getHead(), 4), 1);
+        System.out.printf("找到倒数第 %d 节点 heroNode = " + findLastIndexNode(singleLinkedList.getHead(), 4) + "\n", 1);
+
+        HeroNode reverse = reverse(singleLinkedList.getHead());
+
+        list(reverse);
+    }
+
+    //单链表的反转
+    //1.先定义一个临时头节点 reverseHead
+    //2.遍历源链表 并逐一添加到reverseHead的最前端
+    //3.让head.next 指向reverseHead.next
+    public static HeroNode reverse(HeroNode head) {
+        //判断链表是否为空
+        if (head.next == null) {
+            return head;
+        }
+        //1.先定义一个临时头节点 reverseHead
+        HeroNode reverseHead = new HeroNode(100, "", "");
+        HeroNode cur = head.next;
+        while (cur != null) {
+            //2.遍历源链表 并逐一添加到reverseHead的最前端
+            HeroNode temp = cur;
+            cur = cur.next;
+
+            temp.next = reverseHead.next;
+            reverseHead.next = temp;
+        }
+        //3.让head.next 指向reverseHead.next
+        head.next = reverseHead.next;
+        return head;
     }
 
     //查找单链表中的倒数第K个节点
@@ -69,6 +98,29 @@ public class SingleLinkedListDemo {
             cur = cur.next;
         }
         return cur;
+    }
+
+    //显示链表
+    public static void list(HeroNode head) {
+        //判断链表是否为空
+        if (head.next == null) {
+            System.out.println("链表为空");
+            return;
+        }
+
+        //因为头节点不能动,
+        HeroNode temp = head.next;
+
+        while (true) {
+            //判断是否到最后了
+            if (temp == null) {
+                break;
+            }
+            //打印数据
+            System.out.println(temp);
+            //后移
+            temp = temp.next;
+        }
     }
 
     //方法:获取到单链表的节点的个数(如果是带头结点的链表,需求不统计头结点)
