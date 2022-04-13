@@ -44,7 +44,7 @@ public class SingleLinkedListDemo {
 
         System.out.printf("找到倒数第 %d 节点 heroNode = " + findLastIndexNode(singleLinkedList.getHead(), 4) + "\n", 1);
 
-        HeroNode reverse = reverse(singleLinkedList.getHead());
+        HeroNode reverse = reverseLinkedList(singleLinkedList.getHead());
 
         list(reverse);
     }
@@ -53,9 +53,9 @@ public class SingleLinkedListDemo {
     //1.先定义一个临时头节点 reverseHead
     //2.遍历源链表 并逐一添加到reverseHead的最前端
     //3.让head.next 指向reverseHead.next
-    public static HeroNode reverse(HeroNode head) {
+    public static HeroNode reverseLinkedList(HeroNode head) {
         //判断链表是否为空
-        if (head.next == null) {
+        if (head.next == null || head.next.next == null) {
             return head;
         }
         //1.先定义一个临时头节点 reverseHead
@@ -63,11 +63,12 @@ public class SingleLinkedListDemo {
         HeroNode cur = head.next;
         while (cur != null) {
             //2.遍历源链表 并逐一添加到reverseHead的最前端
-            HeroNode temp = cur;
-            cur = cur.next;
+            HeroNode next = cur.next;
 
-            temp.next = reverseHead.next;
-            reverseHead.next = temp;
+            cur.next = reverseHead.next;
+            reverseHead.next = cur;
+
+            cur = next;
         }
         //3.让head.next 指向reverseHead.next
         head.next = reverseHead.next;
