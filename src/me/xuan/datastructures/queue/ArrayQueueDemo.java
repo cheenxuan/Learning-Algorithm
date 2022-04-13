@@ -21,6 +21,7 @@ public class ArrayQueueDemo {
             key = scanner.next().charAt(0);
 
             switch (key) {
+
                 case 's':
                     arrayQueue.showQueue();
                     break;
