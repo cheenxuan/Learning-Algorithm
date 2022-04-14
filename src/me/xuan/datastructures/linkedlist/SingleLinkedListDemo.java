@@ -10,7 +10,8 @@ public class SingleLinkedListDemo {
         HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
         HeroNode hero2 = new HeroNode(23, "卢俊义", "玉麒麟");
         HeroNode hero3 = new HeroNode(32, "吴用", "智多星");
-        HeroNode hero4 = new HeroNode(14, "林冲", "豹子头");
+        HeroNode hero4 = new HeroNode(12, "林冲", "豹子头");
+        HeroNode hero5 = new HeroNode(62, "林冲", "豹子头");
 
 
         HeroNode hero11 = new HeroNode(12, "宋江", "及时雨");
@@ -18,7 +19,7 @@ public class SingleLinkedListDemo {
         HeroNode hero31 = new HeroNode(33, "吴用", "智多星");
         HeroNode hero41 = new HeroNode(51, "林冲", "豹子头");
 
-        HeroNode hero5 = new HeroNode(3, "吴用1", "智多星1");
+//        HeroNode hero5 = new HeroNode(3, "吴用1", "智多星1");
         SingleLinkedList singleLinkedList = new SingleLinkedList();
 //        singleLinkedList.add(hero1);
 //        singleLinkedList.add(hero4);
@@ -30,6 +31,7 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(hero1);
         singleLinkedList.addByOrder(hero4);
         singleLinkedList.addByOrder(hero3);
+        singleLinkedList.addByOrder(hero5);
 
         singleLinkedList.list();
 
@@ -65,6 +67,55 @@ public class SingleLinkedListDemo {
 //        list(reverse);
 //        System.out.println("测试逆序打印单链表~");
 //        reversePrint(singleLinkedList.getHead());
+
+        HeroNode head = mergeLinkedList(singleLinkedList.getHead(), singleLinkedList1.getHead());
+        list(head);
+    }
+
+    public static HeroNode mergeLinkedList(HeroNode head1, HeroNode head2) {
+        if (head1.next == null) {
+            return head2;
+        }
+        if (head2.next == null) {
+            return head1;
+        }
+        SingleLinkedList newSingleLinkedList = new SingleLinkedList();
+        HeroNode cur1 = head1.next;
+        HeroNode cur2 = head2.next;
+        HeroNode temp = null;
+        while (cur1 != null || cur2 != null) {
+            if (cur1 == null) {
+                temp = cur2;
+                cur2 = cur2.next;
+                temp.next = null;
+                newSingleLinkedList.add(temp);
+                break;
+            }
+            if (cur2 == null) {
+                temp = cur1;
+                cur1 = cur1.next;
+                temp.next = null;
+                newSingleLinkedList.add(temp);
+                break;
+            }
+
+            if (cur2.no < cur1.no) {
+                temp = cur2;
+                cur2 = cur2.next;
+            } else if (cur1.no < cur2.no) {
+                temp = cur1;
+                cur1 = cur1.next;
+            } else {
+                temp = cur1;
+                cur1 = cur1.next;
+                cur2 = cur2.next;
+            }
+
+            temp.next = null;
+            newSingleLinkedList.add(temp);
+        }
+
+        return newSingleLinkedList.getHead();
     }
 
     //从尾到头打印单链表
