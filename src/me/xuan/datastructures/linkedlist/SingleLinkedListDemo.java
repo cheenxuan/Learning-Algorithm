@@ -1,14 +1,22 @@
 package me.xuan.datastructures.linkedlist;
 
+import java.util.Stack;
+
 public class SingleLinkedListDemo {
 
     public static void main(String[] args) {
 
         //创建节点
         HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
-        HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
-        HeroNode hero3 = new HeroNode(3, "吴用", "智多星");
-        HeroNode hero4 = new HeroNode(4, "林冲", "豹子头");
+        HeroNode hero2 = new HeroNode(23, "卢俊义", "玉麒麟");
+        HeroNode hero3 = new HeroNode(32, "吴用", "智多星");
+        HeroNode hero4 = new HeroNode(14, "林冲", "豹子头");
+
+
+        HeroNode hero11 = new HeroNode(12, "宋江", "及时雨");
+        HeroNode hero21 = new HeroNode(52, "卢俊义", "玉麒麟");
+        HeroNode hero31 = new HeroNode(33, "吴用", "智多星");
+        HeroNode hero41 = new HeroNode(51, "林冲", "豹子头");
 
         HeroNode hero5 = new HeroNode(3, "吴用1", "智多星1");
         SingleLinkedList singleLinkedList = new SingleLinkedList();
@@ -25,10 +33,18 @@ public class SingleLinkedListDemo {
 
         singleLinkedList.list();
 
-        System.out.println("链表修改后~~");
-        //修改节点
-        singleLinkedList.update(hero5);
-        singleLinkedList.list();
+        SingleLinkedList singleLinkedList1 = new SingleLinkedList();
+        singleLinkedList1.addByOrder(hero21);
+        singleLinkedList1.addByOrder(hero11);
+        singleLinkedList1.addByOrder(hero41);
+        singleLinkedList1.addByOrder(hero31);
+
+        singleLinkedList1.list();
+
+//        System.out.println("链表修改后~~");
+//        //修改节点
+//        singleLinkedList.update(hero5);
+//        singleLinkedList.list();
 
 //        System.out.println("删除节点后~~");
 //        singleLinkedList.delete(hero1);
@@ -39,14 +55,36 @@ public class SingleLinkedListDemo {
 //        singleLinkedList.delete(hero5);
 //        singleLinkedList.list();
 
-        int length = getLength(singleLinkedList.getHead());
-        System.out.printf("该链表的有效节点数为: %d \n", length);
+//        int length = getLength(singleLinkedList.getHead());
+//        System.out.printf("该链表的有效节点数为: %d \n", length);
+//
+//        System.out.printf("找到倒数第 %d 节点 heroNode = " + findLastIndexNode(singleLinkedList.getHead(), 4) + "\n", 1);
+//
+//        HeroNode reverse = reverseLinkedList(singleLinkedList.getHead());
+//
+//        list(reverse);
+//        System.out.println("测试逆序打印单链表~");
+//        reversePrint(singleLinkedList.getHead());
+    }
 
-        System.out.printf("找到倒数第 %d 节点 heroNode = " + findLastIndexNode(singleLinkedList.getHead(), 4) + "\n", 1);
+    //从尾到头打印单链表
+    public static void reversePrint(HeroNode head) {
+        if (head.next == null) {
+            return;
+        }
 
-        HeroNode reverse = reverseLinkedList(singleLinkedList.getHead());
+        //创建一个栈,将各个节点压入栈
+        Stack<HeroNode> stack = new Stack<>();
+        HeroNode cur = head.next;
+        //将链表的所有节点压入栈
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next;
+        }
 
-        list(reverse);
+        while (stack.size() > 0) {
+            System.out.println(stack.pop());
+        }
     }
 
     //单链表的反转
