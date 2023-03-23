@@ -1,4 +1,4 @@
-package me.xuan.algorithms;
+package me.xuan.algorithms.class01;
 
 public class Code04_BSExist {
     public static boolean exist(int[] sortedArr, int num) {

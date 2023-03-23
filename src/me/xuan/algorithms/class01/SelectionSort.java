@@ -1,4 +1,4 @@
-package me.xuan.algorithms.sort;
+package me.xuan.algorithms.class01;
 
 public class SelectionSort {
 
