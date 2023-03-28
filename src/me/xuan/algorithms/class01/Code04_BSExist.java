@@ -1,23 +1,50 @@
 package me.xuan.algorithms.class01;
 
+import me.xuan.algorithms.TestGenerate;
+
+import java.util.Arrays;
+
 public class Code04_BSExist {
-    public static boolean exist(int[] sortedArr, int num) {
-        if (sortedArr == null || sortedArr.length == 0) {
+
+    public static boolean bsExist(int[] arr, int num) {
+        if (arr == null || arr.length == 0) {
             return false;
         }
+
         int L = 0;
-        int R = sortedArr.length - 1;
+        int R = arr.length - 1;
         int mid = 0;
         while (L < R) {
-            mid = L + ((R - L) >> 1);//等同于 mid = (L + R) / 2;
-            if (sortedArr[mid] == num) {
-                return true;
-            } else if (sortedArr[mid] > num) {
+            mid = L + (R - L) / 2;
+            if (num < arr[mid]) {
                 R = mid - 1;
-            } else {
+            } else if (num > arr[mid]) {
                 L = mid + 1;
+            } else {
+                return true;
             }
         }
-        return sortedArr[L] == num;
+        return arr[L] == num;
     }
+
+    public static void main(String[] args) {
+
+        int[] arr = TestGenerate.generateRandomArray(100, 100);
+        Arrays.sort(arr);
+
+
+        for (int a : arr) {
+            System.out.print(a + ", ");
+        }
+        System.out.println();
+
+        System.out.println("-------测试结果");
+        System.out.println(bsExist(arr, 5));
+
+        System.out.println("-------- 对数器描述");
+        System.out.println(Arrays.binarySearch(arr, 5) > 0);
+
+
+    }
+
 }

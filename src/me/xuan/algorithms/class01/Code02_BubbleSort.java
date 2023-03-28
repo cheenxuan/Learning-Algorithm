@@ -1,6 +1,8 @@
 package me.xuan.algorithms.class01;
 
-public class BubbleSort {
+import me.xuan.algorithms.TestGenerate;
+
+public class Code02_BubbleSort {
 
     public static void bubbleSort(int[] arr) {
         if (arr == null || arr.length < 2) {
@@ -16,15 +18,19 @@ public class BubbleSort {
         }
     }
 
-    private static void swap(int[] arr, int i, int j) {
+    public static void swap(int[] arr, int i, int j) {
         arr[i] = arr[i] ^ arr[j];
         arr[j] = arr[i] ^ arr[j];
         arr[i] = arr[i] ^ arr[j];
     }
 
     public static void main(String[] args) {
-        int[] arr = {3, 4, 2, 1, 7, 5, 6, 8, 9};
+        int[] arr = TestGenerate.generateRandomArray(1000, 50);
+
         bubbleSort(arr);
-        System.out.println(arr.toString());
+
+        for (int i : arr) {
+            System.out.print(i + ", ");
+        }
     }
 }
